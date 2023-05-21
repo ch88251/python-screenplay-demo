@@ -1,26 +1,24 @@
-import json
-from time import sleep
 import unittest
-import requests
+import unittest
 
-from screenpy_selenium.abilities import BrowseTheWeb
+import requests
 from screenpy import AnActor, given, then, when
-from screenpy.pacing import act, scene
 from screenpy.actions import See
+from screenpy.pacing import act, scene
+from screenpy.resolutions import ReadsExactly
+from screenpy_selenium.abilities import BrowseTheWeb
 from screenpy_selenium.actions import Click, Open, Enter, Wait
 from screenpy_selenium.questions import TheText
-from screenpy.resolutions import ReadsExactly
-from ui.account_created_page import ACCOUNT_CREATED_HEADING
 
+from ui.account_created_page import ACCOUNT_CREATED_HEADING
 from ui.homepage import (
     URL
 )
-
 from ui.menu_bar import MENU_BAR_SIGNUP_LOGIN
 from ui.signup_login_form import (
-    SIGNUP_FORM_EMAIL_ADDRESS, 
+    SIGNUP_FORM_EMAIL_ADDRESS,
     SIGNUP_FORM_HEADING,
-    SIGNUP_FORM_SIGNUP_BUTTON, 
+    SIGNUP_FORM_SIGNUP_BUTTON,
     SIGNUP_FORM_USER_NAME
 )
 from ui.signup_page import (
@@ -35,10 +33,11 @@ from ui.signup_page import (
     SIGNUP_COUNTRY_UNITES_STATES_OPTION,
     SIGNUP_DAY_OF_BIRTH_3_OPTION,
     SIGNUP_GENDER_MALE_CHECKBOX,
-    SIGNUP_MONTH_OF_BIRTH_3_OPTION, 
+    SIGNUP_MONTH_OF_BIRTH_3_OPTION,
     SIGNUP_PASSWORD_TEXT_BOX,
     SIGNUP_YEAR_OF_BIRTH_1996_OPTION
 )
+
 
 class TestSignupLogin(unittest.TestCase):
 
@@ -101,8 +100,6 @@ class TestSignupLogin(unittest.TestCase):
 
         then(Susan).should(See(TheText.of_the(ACCOUNT_CREATED_HEADING), ReadsExactly("ACCOUNT CREATED!")))
 
-
-
     def tearDown(self) -> None:
         self.actor.exit()
         url = "https://automationexercise.com/api/deleteAccount"
@@ -118,5 +115,5 @@ class TestSignupLogin(unittest.TestCase):
 
         print(response.text)
 
-        # assert response.content == 'Account deleted!', 'Request to delete account failed.'
+        assert response.content == 'Account deleted!', 'Request to delete account failed.'
     

@@ -1,0 +1,26 @@
+@startuml
+
+skinparam linetype polyline
+
+hide class circle
+hide members
+
+class Actors
+class Abilities
+class Tasks
+class Interactions
+class Questions
+class "System Under Test" as sut
+
+Actors o---> Abilities : have >
+Actors --> Tasks : perform >
+Actors --> Interactions : perform >
+Actors --> Questions : answer >
+Tasks o---> Interactions : made up of >
+Abilities ---> Interactions : enable >
+Abilities ---> Questions : enable >
+Abilities ---> sut : invoke >
+Questions ---> sut : about the state of >
+Interactions ---> sut : interact with >
+
+@enduml
